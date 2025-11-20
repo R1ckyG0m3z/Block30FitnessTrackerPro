@@ -6,8 +6,8 @@ export async function getActivities() {
     const response = await fetch(API + "/activities");
     const result = await response.json();
     return result;
-  } catch (e) {
-    console.error(e);
+  } catch (err) {
+    console.error(err);
     return [];
   }
 }
@@ -53,5 +53,17 @@ export async function deleteActivity(token, id) {
   if (!response.ok) {
     const result = await response.json();
     throw Error(result.message);
+  }
+}
+
+// Added a single activity by ID from the API.
+export async function getActivity(id) {
+  try {
+    const response = await fetch(API + "/activities/" + id);
+    const result = await response.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+    return null;
   }
 }
